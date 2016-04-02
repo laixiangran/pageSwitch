@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8"/>
+	<title>页面切换</title>
+	<link rel="stylesheet" href="css/demo.css" />
+    <link rel="stylesheet" href="../dist/css/pageSwitch.min.css" />
+    <script src="../dist/js/common.min.js"></script>
+    <script src="../dist/js/jquery-1.11.2.min.js"></script>
+	<script src="../dist/js/pageSwitch.min.js"></script>
+    <script>
+        $(function(){
+            $("#container").switchPage({
+                "loop" : true,
+                "keyboard" : true
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+        <div class="section active" id="section0">
+            <div class="intro">
+                <h1 class="title">switchPage</h1>
+                <p>Create Beautiful Fullscreen Scrolling Websites</p>
+            </div>
+        </div>
+        <div class="section" id="section1">
+            <div class="intro">
+                <h1 class="title">Example</h1>
+                <p>HTML markup example to define 4 sections</p>
+                <img src="img/example.png"/>
+            </div>
+
+        </div>
+        <div class="section" id="section2">
+            <div class="intro">
+                <h1 class="title">Example</h1>
+                <p>The plug-in configuration parameters</p>
+                <img src="img/example2.png"/>
+            </div>
+        </div>
+        <div class="section" id="section3">
+            <div class="intro">
+                <h1 class="title">THE END</h1>
+                <p>Everything will be okay in the end. If it's not okay, it's not the end.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
