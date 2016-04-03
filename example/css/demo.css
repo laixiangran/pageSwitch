@@ -1,91 +1,102 @@
-h1,body,html{
+h1, body, html {
     padding: 0;
     margin: 0;
 }
-body{
+body {
     font-family: Arial,"Microsoft YaHei","Hiragino Sans GB",sans-serif;
 }
-html,body{
+html, body {
     height: 100%;
     overflow: hidden;
 }
-h1{
+h1 {
     font-size: 6em;
     font-weight: normal;
 }
-p{
+p {
     font-size: 2em;
     margin:0.5em 0 2em 0;
 }
-#container,.section{
+#container, .section {
     height: 100%;
     position: relative;
 }
+
+/*横向切换*/
+/*#container {*/
+    /*width: 400%;*/
+    /*float: left;*/
+/*}*/
+/*.section {*/
+    /*width: 25%;*/
+    /*float: left;*/
+/*}*/
+
 #section0,
 #section1,
 #section2,
-#section3{
+#section3 {
     background-color: #000;
     background-size: cover;
     background-position: 50% 50%;
 }
-#section0{
+#section0 {
     background-image: url(../img/1.jpg);
     color: #fff;
     text-shadow:1px 1px 1px #333;
 }
-#section1{
+#section1 {
     color: #fff;
     text-shadow:1px 1px 1px #333;
     background-image: url(../img/2.jpg);
 }
-#section2{
+#section2 {
     background-image: url(../img/3.jpg);
     color: #fff;
     text-shadow:1px 1px 1px #666;
 }
-#section3{
+#section3 {
     color: #008283;
     background-image: url(../img/4.jpg);
     text-shadow:1px 1px 1px #fff;
 }
-#section0 p{
+#section0 p {
     color: #F1FF00;
 }
-#section3 p{
+#section3 p {
     color: #00A3AF;
 }
-.left{
+.left {
     float: left;
 }
-.intro{
+.intro {
     position: absolute;
     top: 50%;
     width: 100%;
     transform: translateY(-50%);
     text-align: center;
 }
-#pages{
+#pages {
     position:fixed;
     right: 10px;
     top: 50%;
     list-style: none;
 }
-#pages li{
+#pages li {
     width: 8px;
     height: 8px;
     border-radius: 50%;
     background: #fff;
     margin: 0 0 10px 5px;
 }
-#pages li.active{
+#pages li.active {
     width: 14px;
     height: 14px;
     border: 2px solid #FFFE00;
     background: none;
     margin-left: 0;
 }
-.section.active .title{
+.section.active .title {
     transform: translateX(-100%);
     animation: sectitle 1s ease-in-out 100ms forwards;
 }
@@ -93,7 +104,7 @@ p{
     transform: translateX(100%);
     animation: sec 1s ease-in-out 100ms forwards;
 }
-@keyframes sectitle{
+@keyframes sectitle {
     0%{
         transform: translateX(-100%);
     }
