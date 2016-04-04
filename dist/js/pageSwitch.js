@@ -20,7 +20,7 @@
         "loop" : true, // 是否循环
         "keyboard" : false, // 是否支持键盘
         "direction" : "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
-        "pageSwitchComplete" : function(pagenum) {} // 切换完成的回调函数
+        "pageSwitchComplete" : function(pageIndex) {} // 切换完成的回调函数
     };
 
     var pageSwitch = window.pageSwitch = function(options) {
