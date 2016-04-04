@@ -2,7 +2,7 @@
 
 ##简介
 
-基于jquery的页面切换插件，可水平/垂直切换滑动（正在使用纯javascript实现...）
+纯javascript实现的页面切换插件，可水平/垂直滑动切换
 
 ###模式
 
@@ -12,16 +12,16 @@
 
 ```javascript
 options = {
-            "container": "#container", // 页面容器
-            "sections": ".section", // 子页面容器
-            "easing": "ease", // 切换动画，ease-in,ease-out,linear
-            "duration": 1000, // 每次动画执行的时间
-            "pagination": true, // 是否显示分页
-            "loop": false, // 是否循环
-            "keyboard": true, // 是否支持键盘
-            "direction": "vertical", // 滑动的方向 horizontal,vertical
-            "pageSwitchComplete" : function(pagenum) {} // 切换完成的回调函数
-        };
+    "container": "#container", // 页面容器
+    "pages": ".section", // 子页面容器
+    "easing": "ease", // 切换动画，ease-in,ease-out,linear
+    "duration": 1000, // 每次动画执行的时间
+    "pagination": true, // 是否显示分页
+    "loop": false, // 是否循环
+    "keyboard": true, // 是否支持键盘
+    "direction": "vertical", // 滑动的方向 horizontal,vertical
+    "pageSwitchComplete" : function(pagenum) {} // 切换完成的回调函数
+};
 ```
 
 ##使用
@@ -29,7 +29,7 @@ options = {
 ###引入
 
 ```html
-<script src="../dist/jquery-1.11.2.min.js"></script>
+<script src="http://www.laixiangran.cn/CDN/common.js"></script>
 <script src="../dist/js/pageSwitch.min.js"></script>
 ```
     
@@ -55,5 +55,5 @@ options = {
 ###初始化
 
 ```javascript
-$("#container").switchPage(options);
+new pageSwitch(options);
 ```
