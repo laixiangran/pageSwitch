@@ -1,13 +1,9 @@
-h1, body, html {
+h1 {
     padding: 0;
     margin: 0;
 }
 body {
     font-family: Arial,"Microsoft YaHei","Hiragino Sans GB",sans-serif;
-}
-html, body {
-    height: 100%;
-    overflow: hidden;
 }
 h1 {
     font-size: 6em;
@@ -65,9 +61,6 @@ p {
 }
 #section3 p {
     color: #00A3AF;
-}
-.left {
-    float: left;
 }
 .intro {
     position: absolute;

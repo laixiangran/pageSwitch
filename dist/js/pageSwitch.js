@@ -80,23 +80,28 @@
             if (!rect) {
                 return;
             }
-            if (this.pageIndex != 0) {
-                this.offset -= rect.top;
-            } else {
-                this.offset = 0;
-            }
-            this.initEffects(this.offset, this.pageIndex);
+            this.initEffects(rect, this.pageIndex);
         },
-        "initEffects": function(offset, pageIndex) {
+        "initEffects": function(rect, pageIndex) {
             var psThis = this;
             psThis.canScroll = false;
             var opts = psThis.options;
             var container = psThis.container;
             var traslate = "";
             if (opts.direction == "horizontal") {
-                // traslate = "-" + rect.left + "px, 0px, 0px";
+                if (psThis.pageIndex != 0) {
+                    psThis.offset -= rect.left;
+                } else {
+                    psThis.offset = 0;
+                }
+                traslate = psThis.offset + "px, 0px, 0px";
             } else {
-                traslate = "0px, " + offset + "px, 0px";
+                if (psThis.pageIndex != 0) {
+                    psThis.offset -= rect.top;
+                } else {
+                    psThis.offset = 0;
+                }
+                traslate = "0px, " + psThis.offset + "px, 0px";
             }
             com.$D.setStyle(container, {
                 "transition": "all " + opts.duration + "ms " + opts.easing,
