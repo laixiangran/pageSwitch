@@ -38,7 +38,7 @@ html, body {
     background: #fff;
     margin: 0 0 10px 5px;
 }
-.ps-paging li.active {
+.ps-paging .paging-active {
     width: 14px;
     height: 14px;
     border: 2px solid #FFFE00;

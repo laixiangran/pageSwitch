@@ -28,6 +28,7 @@
         this.pageIndex = 0;
         this.container = null;
         this.pages = [];
+        this.paging = [];
         this.canScroll = true;
         this.offset = 0;
         this.init();
@@ -42,18 +43,25 @@
             // 初始化布局
             com.$D.addClass(psThis.container, "ps-container");
             com.$D.addClass(psThis.pages[0], "ps-active");
+
+            // 添加分页
+            if (psThis.options.pagination) {
+                var insertNode = '<ul class="ps-paging">';
+                com.$A.forEach(psThis.pages, function(page, index) {
+                    insertNode += "<li></li>";
+                });
+                insertNode += '</ul>';
+                com.$D.append(document.body, insertNode);
+            }
+
             if (psThis.options.direction == "horizontal") {
-                com.$D.addClass(psThis.container, "ps-h-container");
-                com.$D.addClass(psThis.container, "ps-left");
-                com.$A.forEach(psThis.pages, function(page, index, pages) {
-                    com.$D.addClass(page, "ps-page");
-                    com.$D.addClass(page, "ps-h-page");
-                    com.$D.addClass(page, "ps-left");
+                com.$D.addClass(psThis.container, ["ps-h-container", "ps-left"]);
+                com.$A.forEach(psThis.pages, function(page) {
+                    com.$D.addClass(page, ["ps-page", "ps-h-page", "ps-left"]);
                 });
             } else {
-                com.$A.forEach(psThis.pages, function(page, index, pages) {
-                    com.$D.addClass(page, "ps-page");
-                    com.$D.addClass(page, "ps-v-page");
+                com.$A.forEach(psThis.pages, function(page) {
+                    com.$D.addClass(page, ["ps-page", "ps-v-page"]);
                 });
             }
 
