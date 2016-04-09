@@ -5,43 +5,48 @@ html, body {
     overflow: hidden;
 }
 
-/*垂直切换*/
 .ps-container, .ps-page {
     height: 100%;
     position: relative;
 }
 
-/*水平切换*/
-.ps-h-container {
-    width: 400%;
-}
-
-.ps-h-page {
-    width: 25%;
-}
-
-.ps-left {
-    float: left;
-}
-
 /*分页*/
 .ps-paging {
     position:fixed;
-    right: 10px;
-    top: 50%;
     list-style: none;
 }
-.ps-paging li {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 0 10px 5px;
+.ps-paging.ps-paging-v {
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
-.ps-paging .paging-active {
-    width: 14px;
-    height: 14px;
+.ps-paging.ps-paging-h {
+    bottom: 10px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.ps-paging li {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
     border: 2px solid #FFFE00;
     background: none;
-    margin-left: 0;
+    cursor: pointer;
+}
+.ps-paging.ps-paging-v li {
+    margin: 0 0 10px 5px;
+}
+.ps-paging.ps-paging-h li {
+    margin: 0 10px 5px 0;
+    float: left;
+}
+.ps-paging li:hover {
+    background: #fff;
+}
+.ps-paging li.paging-active {
+    width: 10px;
+    height: 10px;
+    background: #fff;
 }

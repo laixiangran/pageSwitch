@@ -28,7 +28,7 @@
         this.pageIndex = 0;
         this.container = null;
         this.pages = [];
-        this.paging = [];
+        this.paging = null;
         this.canScroll = true;
         this.offset = 0;
         this.init();
@@ -42,24 +42,43 @@
 
             // 初始化布局
             com.$D.addClass(psThis.container, "ps-container");
-            com.$D.addClass(psThis.pages[0], "ps-active");
+            com.$D.addClass(psThis.pages[psThis.pageIndex], "ps-active");
 
             // 添加分页
             if (psThis.options.pagination) {
                 var insertNode = '<ul class="ps-paging">';
                 com.$A.forEach(psThis.pages, function(page, index) {
-                    insertNode += "<li></li>";
+                    insertNode += '<li title="' + (index + 1) + '"></li>';
                 });
                 insertNode += '</ul>';
-                com.$D.append(document.body, insertNode);
+                psThis.paging = com.$D.append(document.body, insertNode);
             }
+            com.$D.addClass(psThis.paging.childNodes[psThis.pageIndex], "paging-active");
+
+            // 给分页注册点击事件
+            com.$A.forEach(psThis.paging.childNodes, function(paging, index) {
+                com.$E.addEvent(paging, "click", function(event) {
+                    psThis.pageIndex = index;
+                    psThis.scrollPage();
+                });
+            });
 
             if (psThis.options.direction == "horizontal") {
-                com.$D.addClass(psThis.container, ["ps-h-container", "ps-left"]);
+                psThis.paging ? com.$D.addClass(psThis.paging, "ps-paging-h") : com.$O.noop();
+                com.$D.addClass(psThis.container, ["ps-h-container"]);
+                com.$D.setStyle(psThis.container, {
+                    "width": (psThis.pages.length * 100) + "%",
+                    "float": "left"
+                });
                 com.$A.forEach(psThis.pages, function(page) {
-                    com.$D.addClass(page, ["ps-page", "ps-h-page", "ps-left"]);
+                    com.$D.addClass(page, ["ps-page", "ps-h-page"]);
+                    com.$D.setStyle(page, {
+                        "width": (100 / psThis.pages.length) + "%",
+                        "float": "left"
+                    });
                 });
             } else {
+                psThis.paging ? com.$D.addClass(psThis.paging, "ps-paging-v") : com.$O.noop();
                 com.$A.forEach(psThis.pages, function(page) {
                     com.$D.addClass(page, ["ps-page", "ps-v-page"]);
                 });
@@ -80,40 +99,45 @@
             });
         },
         "movePageUp": function() {
-            var opts = this.options;
-            var pages = this.pages;
-            var flag = (this.pageIndex <= 0 || opts.loop);
+            var opts = this.options,
+                pages = this.pages,
+                flag = (this.pageIndex <= 0 || opts.loop);
+
             if (this.pageIndex) {
                 this.pageIndex--;
             } else if(opts.loop) {
                 this.pageIndex = pages.length - 1;
             }
-            flag ? com.$O.noop() : this.scrollPage(pages[this.pageIndex]);
+
+            flag ? this.scrollPage() : com.$O.noop();
         },
         "movePageDown": function() {
-            var opts = this.options;
-            var pages = this.pages;
-            var flag = (this.pageIndex >= pages.length - 1 || opts.loop);
+            var opts = this.options,
+                pages = this.pages,
+                flag = (this.pageIndex >= pages.length - 1 || opts.loop);
+
             if (this.pageIndex < pages.length - 1) {
                 this.pageIndex++;
             } else if(opts.loop) {
                 this.pageIndex = 0;
             }
-            flag ? com.$O.noop() : this.scrollPage(pages[this.pageIndex]);
+
+            flag ? this.scrollPage() : com.$O.noop();
         },
-        "scrollPage": function(page) {
-            var rect = com.$D.getRect(page);
+        "scrollPage": function() {
+            var rect = com.$D.getRect(this.pages[this.pageIndex]);
             if (!rect) {
                 return;
             }
-            this.initEffects(rect, this.pageIndex);
+            this.initEffects(rect);
         },
-        "initEffects": function(rect, pageIndex) {
+        "initEffects": function(rect) {
             var psThis = this;
             psThis.canScroll = false;
-            var opts = psThis.options;
-            var container = psThis.container;
-            var traslate = "";
+            var opts = psThis.options,
+                container = psThis.container,
+                traslate = "";
+
             if (opts.direction == "horizontal") {
                 if (psThis.pageIndex != 0) {
                     psThis.offset -= rect.left;
@@ -129,13 +153,14 @@
                 }
                 traslate = "0px, " + psThis.offset + "px, 0px";
             }
+
             com.$D.setStyle(container, {
                 "transition": "all " + opts.duration + "ms " + opts.easing,
                 "transform": "translate3d(" + traslate + ")"
             });
 
             com.$A.forEach(psThis.pages, function(page, index) {
-                if (pageIndex == index) {
+                if (psThis.pageIndex == index) {
                     com.$D.addClass(page, "ps-active");
                 } else {
                     com.$D.removeClass(page, "ps-active");
@@ -147,9 +172,15 @@
                 opts.pageSwitchComplete(psThis.pageIndex);
             });
 
-            // 是否显示分页
-            if (opts.pagination) {
-                //TODO
+            // 分页切换
+            if (psThis.paging) {
+                com.$A.forEach(psThis.paging.childNodes, function(paging, index) {
+                    if (psThis.pageIndex == index) {
+                        com.$D.addClass(paging, "paging-active");
+                    } else {
+                        com.$D.removeClass(paging, "paging-active");
+                    }
+                });
             }
         }
     };
