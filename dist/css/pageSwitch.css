@@ -4,6 +4,44 @@ html, body {
     height: 100%;
     overflow: hidden;
 }
-.left {
+
+/*垂直切换*/
+.ps-container, .ps-page {
+    height: 100%;
+    position: relative;
+}
+
+/*水平切换*/
+.ps-h-container {
+    width: 400%;
+}
+
+.ps-h-page {
+    width: 25%;
+}
+
+.ps-left {
     float: left;
+}
+
+/*分页*/
+.ps-paging {
+    position:fixed;
+    right: 10px;
+    top: 50%;
+    list-style: none;
+}
+.ps-paging li {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 0 0 10px 5px;
+}
+.ps-paging li.active {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #FFFE00;
+    background: none;
+    margin-left: 0;
 }

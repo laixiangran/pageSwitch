@@ -39,6 +39,24 @@
             psThis.container = com.$D.byId(psThis.options.container);
             psThis.pages = com.$D.byClassName(psThis.options.pages, psThis.container);
 
+            // 初始化布局
+            com.$D.addClass(psThis.container, "ps-container");
+            com.$D.addClass(psThis.pages[0], "ps-active");
+            if (psThis.options.direction == "horizontal") {
+                com.$D.addClass(psThis.container, "ps-h-container");
+                com.$D.addClass(psThis.container, "ps-left");
+                com.$A.forEach(psThis.pages, function(page, index, pages) {
+                    com.$D.addClass(page, "ps-page");
+                    com.$D.addClass(page, "ps-h-page");
+                    com.$D.addClass(page, "ps-left");
+                });
+            } else {
+                com.$A.forEach(psThis.pages, function(page, index, pages) {
+                    com.$D.addClass(page, "ps-page");
+                    com.$D.addClass(page, "ps-v-page");
+                });
+            }
+
             // 监听滚动事件
             var mousewheel = com.$B.browser.firefox ? "DOMMouseScroll" : "mousewheel";
             com.$E.addEvent(document, mousewheel, function(event) {
@@ -110,9 +128,9 @@
 
             com.$A.forEach(psThis.pages, function(page, index) {
                 if (pageIndex == index) {
-                    com.$D.addClass(page, "active");
+                    com.$D.addClass(page, "ps-active");
                 } else {
-                    com.$D.removeClass(page, "active");
+                    com.$D.removeClass(page, "ps-active");
                 }
             });
 

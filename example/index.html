@@ -2,14 +2,14 @@
 <html lang="zh-cn">
 <head>
 	<meta charset="utf-8"/>
-	<title>页面切换</title>
+	<title>全屏滚动插件 - pageSwitch</title>
 	<link rel="stylesheet" href="css/demo.css" />
-    <link rel="stylesheet" href="../dist/css/pageSwitch.css" />
+    <link rel="stylesheet" href="../src/css/pageSwitch.css" />
     <script src="http://www.laixiangran.cn/CDN/common.js"></script>
-	<script src="../dist/js/pageSwitch.js"></script>
+	<script src="../src/js/pageSwitch.js"></script>
     <script>
-        var ps = null;
         COM.$W.domReady(function() {
+            var ps = null;
             ps = new pageSwitch({
                 "container" : "container", // 容器，默认为#container
                 "pages" : "section", // 子容器，默认为.page
@@ -28,31 +28,31 @@
 </head>
 <body>
     <div id="container">
-        <div class="section active" id="section0">
+        <div class="section" id="section0">
             <div class="intro">
-                <h1 class="title">switchPage</h1>
-                <p>Create Beautiful Fullscreen Scrolling Websites</p>
+                <h1 class="title">全屏滚动插件</h1>
+                <p>pageSwitch.js - 快速创建漂亮的全屏滚动网站</p>
             </div>
         </div>
         <div class="section" id="section1">
             <div class="intro">
-                <h1 class="title">Example</h1>
-                <p>HTML markup example to define 4 sections</p>
-                <img src="img/example.png"/>
+                <h1 class="title">HTML结构</h1>
+                <p>一个容器container和若干个子容器pages</p>
+                <img src="img/pages.png"/>
             </div>
 
         </div>
         <div class="section" id="section2">
             <div class="intro">
-                <h1 class="title">Example</h1>
-                <p>The plug-in configuration parameters</p>
-                <img src="img/example2.png"/>
+                <h1 class="title">配置参数</h1>
+                <p>插件的配置参数</p>
+                <img src="img/options.png"/>
             </div>
         </div>
         <div class="section" id="section3">
             <div class="intro">
-                <h1 class="title">THE END</h1>
-                <p>Everything will be okay in the end. If it's not okay, it's not the end.</p>
+                <h1 class="title">滚动结束</h1>
+                <p>一切正常的滚动到末尾了</p>
             </div>
         </div>
     </div>

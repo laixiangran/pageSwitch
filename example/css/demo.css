@@ -13,20 +13,6 @@ p {
     font-size: 2em;
     margin:0.5em 0 2em 0;
 }
-#container, .section {
-    height: 100%;
-    position: relative;
-}
-
-/*横向切换*/
-/*#container {*/
-    /*width: 400%;*/
-    /*float: left;*/
-/*}*/
-/*.section {*/
-    /*width: 25%;*/
-    /*float: left;*/
-/*}*/
 
 #section0,
 #section1,
@@ -69,35 +55,23 @@ p {
     transform: translateY(-50%);
     text-align: center;
 }
-#pages {
-    position:fixed;
-    right: 10px;
-    top: 50%;
-    list-style: none;
+.ps-h-page.ps-active .title {
+    transform: translateY(-2000%);
+    animation: sectitle-h 1s ease-in-out 100ms forwards;
 }
-#pages li {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #fff;
-    margin: 0 0 10px 5px;
+.ps-h-page.ps-active p{
+    transform: translateY(2000%);
+    animation: sec-h 1s ease-in-out 100ms forwards;
 }
-#pages li.active {
-    width: 14px;
-    height: 14px;
-    border: 2px solid #FFFE00;
-    background: none;
-    margin-left: 0;
-}
-.section.active .title {
+.ps-v-page.ps-active .title {
     transform: translateX(-100%);
-    animation: sectitle 1s ease-in-out 100ms forwards;
+    animation: sectitle-v 1s ease-in-out 100ms forwards;
 }
-.section.active p{
+.ps-v-page.ps-active p{
     transform: translateX(100%);
-    animation: sec 1s ease-in-out 100ms forwards;
+    animation: sec-v 1s ease-in-out 100ms forwards;
 }
-@keyframes sectitle {
+@keyframes sectitle-v {
     0%{
         transform: translateX(-100%);
     }
@@ -105,11 +79,27 @@ p {
         transform: translateX(0);
     }
 }
-@keyframes sec{
+@keyframes sec-v{
     0%{
         transform: translateX(100%);
     }
     100%{
         transform: translateX(0);
+    }
+}
+@keyframes sectitle-h {
+    0%{
+        transform: translateY(-2000%);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
+@keyframes sec-h{
+    0%{
+        transform: translateY(2000%);
+    }
+    100%{
+        transform: translateY(0);
     }
 }

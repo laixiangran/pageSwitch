@@ -1,1 +1,1 @@
-body,html{padding:0;margin:0;height:100%;overflow:hidden}.left{float:left}
+body,html{padding:0;margin:0;height:100%;overflow:hidden}.ps-container,.ps-page{height:100%;position:relative}.ps-h-container{width:400%}.ps-h-page{width:25%}.ps-left{float:left}.ps-paging{position:fixed;right:10px;top:50%;list-style:none}.ps-paging li{width:8px;height:8px;border-radius:50%;background:#fff;margin:0 0 10px 5px}.ps-paging li.active{width:14px;height:14px;border:2px solid #FFFE00;background:0 0;margin-left:0}

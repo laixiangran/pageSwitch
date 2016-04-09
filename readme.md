@@ -2,7 +2,7 @@
 
 ##简介
 
-纯javascript实现的页面切换插件，可水平/垂直滑动切换
+纯javascript实现的全屏滚动插件插件，可水平/垂直全屏滚动页面
 
 ###模式
 
@@ -12,15 +12,17 @@
 
 ```javascript
 options = {
-    "container": "#container", // 页面容器
-    "pages": ".section", // 子页面容器
-    "easing": "ease", // 切换动画，ease-in,ease-out,linear
-    "duration": 1000, // 每次动画执行的时间
-    "pagination": true, // 是否显示分页
-    "loop": false, // 是否循环
-    "keyboard": true, // 是否支持键盘
-    "direction": "vertical", // 滑动的方向 horizontal,vertical
-    "pageSwitchComplete" : function(pagenum) {} // 切换完成的回调函数
+    "container" : "container", // 容器，默认为#container
+    "pages" : "section", // 子容器，默认为.page
+    "easing" : "ease", // 特效方式，ease-in,ease-out,linear
+    "duration" : 1000, // 每次动画执行的时间
+    "pagination" : true, // 是否显示分页
+    "loop" : false, // 是否循环
+    "keyboard" : true, // 是否支持键盘
+    "direction" : "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
+    "pageSwitchComplete" : function(pageIndex) { // 切换完成的回调函数，参数为当前页的序号
+        console.log("切换完成，当前页的序号为：" + pageIndex);
+    }
 };
 ```
 
