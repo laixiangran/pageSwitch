@@ -19,7 +19,7 @@ options = {
     "pagination" : true, // 是否显示分页
     "loop" : false, // 是否循环
     "keyboard" : true, // 是否支持键盘
-    "direction" : "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
+    "direction" : "vertical", // 滑动的方向，horizontal（水平）, vertical（垂直），默认垂直
     "pageSwitchComplete" : function(pageIndex) { // 切换完成的回调函数，参数为当前页的序号
         console.log("切换完成，当前页的序号为：" + pageIndex);
     }

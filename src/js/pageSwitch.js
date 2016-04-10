@@ -84,7 +84,7 @@
                 });
             }
 
-            // 监听滚动事件
+            // 绑定滚动事件
             var mousewheel = com.$B.browser.firefox ? "DOMMouseScroll" : "mousewheel";
             com.$E.addEvent(document, mousewheel, function(event) {
                 com.$E.preventDefault(event);
@@ -96,6 +96,23 @@
                         psThis.movePageUp();
                     }
                 }
+            });
+
+            //绑定键盘事件
+            if(psThis.options.keyboard) {
+                com.$E.addEvent(document, "keydown", function(event) {
+                    var keyCode = event.keyCode;
+                    if(keyCode == 37 || keyCode == 38) {
+                        psThis.movePageUp();
+                    }else if(keyCode == 39 || keyCode == 40) {
+                        psThis.movePageDown();
+                    }
+                });
+            }
+
+            // 绑定窗口变动事件
+            com.$E.addEvent(window, "resize", function() {
+                psThis.scrollPage();
             });
         },
         "movePageUp": function() {
