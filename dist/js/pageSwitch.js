@@ -17,7 +17,7 @@
         "easing" : "ease", // 特效方式，ease-in,ease-out,linear
         "duration" : 1000, // 每次动画执行的时间
         "pagination" : true, // 是否显示分页
-        "loop" : true, // 是否循环
+        "loop" : false, // 是否循环
         "keyboard" : false, // 是否支持键盘
         "direction" : "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
         "pageSwitchComplete" : function(pageIndex) {} // 切换完成的回调函数
@@ -25,6 +25,11 @@
 
     var pageSwitch = window.pageSwitch = function(options) {
         this.options = com.$O.extend(defaultOptions, options || {});
+        this.infos = {
+            name: "pageSwitch",
+            version: "1.0",
+            author: "laixiangran@163.com"
+        };
         this.pageIndex = 0;
         this.container = null;
         this.pages = [];
@@ -48,7 +53,7 @@
             if (psThis.options.pagination) {
                 var insertNode = '<ul class="ps-paging">';
                 com.$A.forEach(psThis.pages, function(page, index) {
-                    insertNode += '<li title="' + (index + 1) + '"></li>';
+                    insertNode += '<li></li>';
                 });
                 insertNode += '</ul>';
                 psThis.paging = com.$D.append(document.body, insertNode);
@@ -84,7 +89,7 @@
                 });
             }
 
-            // 监听滚动事件
+            // 绑定滚动事件
             var mousewheel = com.$B.browser.firefox ? "DOMMouseScroll" : "mousewheel";
             com.$E.addEvent(document, mousewheel, function(event) {
                 com.$E.preventDefault(event);
@@ -97,11 +102,28 @@
                     }
                 }
             });
+
+            //绑定键盘事件
+            if(psThis.options.keyboard) {
+                com.$E.addEvent(document, "keydown", function(event) {
+                    var keyCode = event.keyCode;
+                    if(keyCode == 37 || keyCode == 38) {
+                        psThis.movePageUp();
+                    }else if(keyCode == 39 || keyCode == 40) {
+                        psThis.movePageDown();
+                    }
+                });
+            }
+
+            // 绑定窗口变动事件
+            com.$E.addEvent(window, "resize", function() {
+                psThis.scrollPage();
+            });
         },
         "movePageUp": function() {
             var opts = this.options,
                 pages = this.pages,
-                flag = (this.pageIndex <= 0 || opts.loop);
+                flag = (this.pageIndex > 0 || opts.loop);
 
             if (this.pageIndex) {
                 this.pageIndex--;
@@ -109,12 +131,13 @@
                 this.pageIndex = pages.length - 1;
             }
 
+            // 是否循环
             flag ? this.scrollPage() : com.$O.noop();
         },
         "movePageDown": function() {
             var opts = this.options,
                 pages = this.pages,
-                flag = (this.pageIndex >= pages.length - 1 || opts.loop);
+                flag = (this.pageIndex < pages.length - 1 || opts.loop);
 
             if (this.pageIndex < pages.length - 1) {
                 this.pageIndex++;

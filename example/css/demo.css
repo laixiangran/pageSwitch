@@ -18,35 +18,27 @@ p {
 #section1,
 #section2,
 #section3 {
+    position: relative;
+    color: #fff;
+    text-shadow:1px 1px 1px #666;
     background-color: #000;
     background-size: cover;
     background-position: 50% 50%;
 }
 #section0 {
-    background-image: url(../img/1.jpg);
-    color: #fff;
-    text-shadow:1px 1px 1px #333;
+    background-image: url(../img/bg1.jpg);
 }
 #section1 {
-    color: #fff;
-    text-shadow:1px 1px 1px #333;
-    background-image: url(../img/2.jpg);
+    background-image: url(../img/bg2.jpg);
 }
 #section2 {
-    background-image: url(../img/3.jpg);
-    color: #fff;
-    text-shadow:1px 1px 1px #666;
+    background-image: url(../img/bg3.jpg);
 }
 #section3 {
-    color: #008283;
-    background-image: url(../img/4.jpg);
-    text-shadow:1px 1px 1px #fff;
+    background-image: url(../img/bg4.jpg);
 }
 #section0 p {
     color: #F1FF00;
-}
-#section3 p {
-    color: #00A3AF;
 }
 .intro {
     position: absolute;

@@ -1,4 +1,4 @@
-#页面切换插件 pageSwitch v1.0.0
+#页面切换插件 pageSwitch
 
 ##简介
 

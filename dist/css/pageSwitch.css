@@ -14,6 +14,7 @@ html, body {
 .ps-paging {
     position:fixed;
     list-style: none;
+    z-index: 9999;
 }
 .ps-paging.ps-paging-v {
     right: 10px;
@@ -31,22 +32,63 @@ html, body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 2px solid #FFFE00;
+    border: 2px solid #ffffff;
     background: none;
-    cursor: pointer;
 }
 .ps-paging.ps-paging-v li {
-    margin: 0 0 10px 5px;
+    margin: 0 0 20px 5px;
 }
 .ps-paging.ps-paging-h li {
-    margin: 0 10px 5px 0;
+    margin: 0 20px 5px 0;
     float: left;
 }
 .ps-paging li:hover {
-    background: #fff;
+    background: #ffffff;
 }
 .ps-paging li.paging-active {
     width: 10px;
     height: 10px;
     background: #fff;
+    -webkit-animation: box-shadow-change 3s linear 0s infinite alternate;
+    animation: box-shadow-change 3s linear 0s infinite alternate;
+}
+@-webkit-keyframes box-shadow-change {
+    0% {
+        box-shadow: 0 0 5px 0 rgb(100, 100, 100);
+    }
+    20% {
+        box-shadow: 0 0 5px 1px rgb(120, 120, 120);
+    }
+    40% {
+        box-shadow: 0 0 5px 2px rgb(140, 140, 140);
+    }
+    60% {
+        box-shadow: 0 0 5px 3px rgb(160, 160, 160);
+    }
+    80% {
+        box-shadow: 0 0 5px 4px rgb(180, 180, 180);
+    }
+    100%{
+        box-shadow: 0 0 5px 5px rgb(200, 200, 200);
+    }
+}
+@keyframes box-shadow-change {
+    0% {
+        box-shadow: 0 0 5px 0 rgb(100, 100, 100);
+    }
+    20% {
+        box-shadow: 0 0 5px 1px rgb(120, 120, 120);
+    }
+    40% {
+        box-shadow: 0 0 5px 2px rgb(140, 140, 140);
+    }
+    60% {
+        box-shadow: 0 0 5px 3px rgb(160, 160, 160);
+    }
+    80% {
+        box-shadow: 0 0 5px 4px rgb(180, 180, 180);
+    }
+    100%{
+        box-shadow: 0 0 5px 5px rgb(200, 200, 200);
+    }
 }
