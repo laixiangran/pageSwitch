@@ -16,7 +16,7 @@
         "pages" : "page", // 子容器，默认为.page
         "easing" : "ease", // 特效方式，ease-in,ease-out,linear
         "duration" : 1000, // 每次动画执行的时间
-        "pagination" : true, // 是否显示分页
+        "pagination" : false, // 是否显示分页
         "loop" : false, // 是否循环
         "keyboard" : false, // 是否支持键盘
         "direction" : "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
@@ -57,16 +57,16 @@
                 });
                 insertNode += '</ul>';
                 psThis.paging = com.$D.append(document.body, insertNode);
-            }
-            com.$D.addClass(psThis.paging.childNodes[psThis.pageIndex], "paging-active");
+                com.$D.addClass(psThis.paging.childNodes[psThis.pageIndex], "paging-active");
 
-            // 给分页注册点击事件
-            com.$A.forEach(psThis.paging.childNodes, function(paging, index) {
-                com.$E.addEvent(paging, "click", function(event) {
-                    psThis.pageIndex = index;
-                    psThis.scrollPage();
+                // 给分页注册点击事件
+                com.$A.forEach(psThis.paging.childNodes, function(paging, index) {
+                    com.$E.addEvent(paging, "click", function(event) {
+                        psThis.pageIndex = index;
+                        psThis.scrollPage();
+                    });
                 });
-            });
+            }
 
             if (psThis.options.direction == "horizontal") {
                 psThis.paging ? com.$D.addClass(psThis.paging, "ps-paging-h") : com.$O.noop();
