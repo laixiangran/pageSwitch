@@ -23,7 +23,7 @@
         "pageSwitchComplete" : function(pageIndex) {} // 切换完成的回调函数
     };
 
-    var pageSwitch = window.pageSwitch = function(options) {
+    var pageSwitch = function(options) {
         this.options = com.$O.extend(defaultOptions, options || {});
         this.infos = {
             name: "pageSwitch",
@@ -207,5 +207,36 @@
             }
         }
     };
+
+    /*
+     * 导出模块
+     */
+
+    var exported = false;
+
+    // jQuery
+    if (typeof window.jQuery === "function") {
+        window.$.fn.pageSwitch = pageSwitch;
+        exported = true;
+    }
+
+    // CMD
+    if (typeof define === "function" && define.amd) {
+        define(function () {
+            return pageSwitch;
+        });
+        exported = true;
+    }
+
+    // AMD
+    if (typeof module !== "undefined" && module.exports) {
+        module.exports = pageSwitch;
+        exported = true;
+    }
+
+    // Global
+    if (!exported) {
+        window.pageSwitch = pageSwitch;
+    }
 
 }(window));

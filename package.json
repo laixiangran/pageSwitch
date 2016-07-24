@@ -1,6 +1,6 @@
 {
   "name": "pageSwitch",
-  "version": "1.0",
+  "version": "1.2",
   "description": "页面切换插件",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

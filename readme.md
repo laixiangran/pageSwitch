@@ -1,14 +1,16 @@
-#页面切换插件 pageSwitch
+# 页面切换插件 pageSwitch v1.2
 
-##简介
+## 简介
 
 纯javascript实现的全屏滚动插件，可水平/垂直全屏滚动页面
 
-###模式
+支持导出为jQuery插件，CMD模块，AMD模块，全局变量
+
+### 模式
 
 两种滑动模式 -- `horizontal（水平）`、`vertical（垂直）`
 
-###默认属性
+### 默认属性
 
 ```javascript
 options = {
@@ -26,9 +28,9 @@ options = {
 };
 ```
 
-##使用
+## 使用
 
-###引入
+### 引入
 
 ```html
 // common.min.js是自己维护的一个js库，汇集了开发时常用的方法
@@ -37,7 +39,7 @@ options = {
 <script src="../dist/js/pageSwitch.min.js"></script>
 ```
     
-###添加容器
+### 添加容器
 
 ```html
 <div id="container">
@@ -56,7 +58,7 @@ options = {
 </div>
 ```
 
-###初始化
+### 初始化
 
 ```javascript
 new pageSwitch(options);
