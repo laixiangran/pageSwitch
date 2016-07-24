@@ -4,7 +4,7 @@
  * 页面切换插件
  */
 
-(function(window, undefined) {
+(function (window, undefined) {
 
     var com = window.COM;
     if (!com) {
@@ -12,18 +12,19 @@
     }
 
     var defaultOptions = {
-        "container" : "container", // 容器，默认为#container
-        "pages" : "page", // 子容器，默认为.page
-        "easing" : "ease", // 特效方式，ease-in,ease-out,linear
-        "duration" : 1000, // 每次动画执行的时间
-        "pagination" : false, // 是否显示分页
-        "loop" : false, // 是否循环
-        "keyboard" : false, // 是否支持键盘
-        "direction" : "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
-        "pageSwitchComplete" : function(pageIndex) {} // 切换完成的回调函数
+        "container": "container", // 容器，默认为#container
+        "pages": "page", // 子容器，默认为.page
+        "easing": "ease", // 特效方式，ease-in,ease-out,linear
+        "duration": 1000, // 每次动画执行的时间
+        "pagination": false, // 是否显示分页
+        "loop": false, // 是否循环
+        "keyboard": false, // 是否支持键盘
+        "direction": "vertical", // 滑动的方向，horizontal,vertical，默认垂直切换
+        "pageSwitchComplete": function (pageIndex) {
+        } // 切换完成的回调函数
     };
 
-    var pageSwitch = function(options) {
+    var pageSwitch = function (options) {
         this.options = com.$O.extend(defaultOptions, options || {});
         this.infos = {
             name: "pageSwitch",
@@ -40,7 +41,7 @@
     };
 
     pageSwitch.prototype = {
-        "init": function() {
+        "init": function () {
             var psThis = this;
             psThis.container = com.$D.byId(psThis.options.container);
             psThis.pages = com.$D.byClassName(psThis.options.pages, psThis.container);
@@ -52,7 +53,7 @@
             // 添加分页
             if (psThis.options.pagination) {
                 var insertNode = '<ul class="ps-paging">';
-                com.$A.forEach(psThis.pages, function(page, index) {
+                com.$A.forEach(psThis.pages, function (page, index) {
                     insertNode += '<li></li>';
                 });
                 insertNode += '</ul>';
@@ -60,8 +61,8 @@
                 com.$D.addClass(psThis.paging.childNodes[psThis.pageIndex], "paging-active");
 
                 // 给分页注册点击事件
-                com.$A.forEach(psThis.paging.childNodes, function(paging, index) {
-                    com.$E.addEvent(paging, "click", function(event) {
+                com.$A.forEach(psThis.paging.childNodes, function (paging, index) {
+                    com.$E.addEvent(paging, "click", function (event) {
                         psThis.pageIndex = index;
                         psThis.scrollPage();
                     });
@@ -75,7 +76,7 @@
                     "width": (psThis.pages.length * 100) + "%",
                     "float": "left"
                 });
-                com.$A.forEach(psThis.pages, function(page) {
+                com.$A.forEach(psThis.pages, function (page) {
                     com.$D.addClass(page, ["ps-page", "ps-h-page"]);
                     com.$D.setStyle(page, {
                         "width": (100 / psThis.pages.length) + "%",
@@ -84,14 +85,14 @@
                 });
             } else {
                 psThis.paging ? com.$D.addClass(psThis.paging, "ps-paging-v") : com.$O.noop();
-                com.$A.forEach(psThis.pages, function(page) {
+                com.$A.forEach(psThis.pages, function (page) {
                     com.$D.addClass(page, ["ps-page", "ps-v-page"]);
                 });
             }
 
             // 绑定滚动事件
             var mousewheel = com.$B.browser.firefox ? "DOMMouseScroll" : "mousewheel";
-            com.$E.addEvent(document, mousewheel, function(event) {
+            com.$E.addEvent(document, mousewheel, function (event) {
                 com.$E.preventDefault(event);
                 if (psThis.canScroll) {
                     var delta = com.$E.getWheelDelta(event);
@@ -104,57 +105,57 @@
             });
 
             //绑定键盘事件
-            if(psThis.options.keyboard) {
-                com.$E.addEvent(document, "keydown", function(event) {
+            if (psThis.options.keyboard) {
+                com.$E.addEvent(document, "keydown", function (event) {
                     var keyCode = event.keyCode;
-                    if(keyCode == 37 || keyCode == 38) {
+                    if (keyCode == 37 || keyCode == 38) {
                         psThis.movePageUp();
-                    }else if(keyCode == 39 || keyCode == 40) {
+                    } else if (keyCode == 39 || keyCode == 40) {
                         psThis.movePageDown();
                     }
                 });
             }
 
             // 绑定窗口变动事件
-            com.$E.addEvent(window, "resize", function() {
+            com.$E.addEvent(window, "resize", function () {
                 psThis.scrollPage();
             });
         },
-        "movePageUp": function() {
+        "movePageUp": function () {
             var opts = this.options,
                 pages = this.pages,
                 flag = (this.pageIndex > 0 || opts.loop);
 
             if (this.pageIndex) {
                 this.pageIndex--;
-            } else if(opts.loop) {
+            } else if (opts.loop) {
                 this.pageIndex = pages.length - 1;
             }
 
             // 是否循环
             flag ? this.scrollPage() : com.$O.noop();
         },
-        "movePageDown": function() {
+        "movePageDown": function () {
             var opts = this.options,
                 pages = this.pages,
                 flag = (this.pageIndex < pages.length - 1 || opts.loop);
 
             if (this.pageIndex < pages.length - 1) {
                 this.pageIndex++;
-            } else if(opts.loop) {
+            } else if (opts.loop) {
                 this.pageIndex = 0;
             }
 
             flag ? this.scrollPage() : com.$O.noop();
         },
-        "scrollPage": function() {
+        "scrollPage": function () {
             var rect = com.$D.getRect(this.pages[this.pageIndex]);
             if (!rect) {
                 return;
             }
             this.initEffects(rect);
         },
-        "initEffects": function(rect) {
+        "initEffects": function (rect) {
             var psThis = this;
             psThis.canScroll = false;
             var opts = psThis.options,
@@ -182,7 +183,7 @@
                 "transform": "translate3d(" + traslate + ")"
             });
 
-            com.$A.forEach(psThis.pages, function(page, index) {
+            com.$A.forEach(psThis.pages, function (page, index) {
                 if (psThis.pageIndex == index) {
                     com.$D.addClass(page, "ps-active");
                 } else {
@@ -190,14 +191,14 @@
                 }
             });
 
-            com.$E.addEvent(container, "transitionend", function() {
+            com.$E.addEvent(container, "transitionend", function () {
                 psThis.canScroll = true;
                 opts.pageSwitchComplete(psThis.pageIndex);
             });
 
             // 分页切换
             if (psThis.paging) {
-                com.$A.forEach(psThis.paging.childNodes, function(paging, index) {
+                com.$A.forEach(psThis.paging.childNodes, function (paging, index) {
                     if (psThis.pageIndex == index) {
                         com.$D.addClass(paging, "paging-active");
                     } else {
@@ -238,5 +239,4 @@
     if (!exported) {
         window.pageSwitch = pageSwitch;
     }
-
 }(window));
